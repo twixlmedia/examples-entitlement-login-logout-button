@@ -1,0 +1,63 @@
+<html>
+
+<head>
+
+    <title>Entitlement Login / Logout</title>
+
+    <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, width=device-width" />
+
+    <script type="text/javascript" src="jquery.min.js"></script>
+
+    <style>
+
+        h1 {
+            font-family: sans-serif;
+            font-size: 130%;
+            text-align: center;
+            font-weight: normal;
+            line-height: 64px;
+            color: black;
+        }
+
+        h1 a {
+            font-family: sans-serif;
+            color: black;
+            vertical-align: center;
+            text-transform: uppercase;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <h1 id="twx-login-button" style="display: none;">
+        <a href="tp-entitlements-signin://self">Login</a>
+    </h1>
+    
+    <h1 id="twx-logout-button" style="display: none;">
+        <a href="tp-entitlements-clear-token://self">Logout</a>
+    </h1>
+    
+    <script>
+
+        function onEntitlementToken(token) {
+            if (token) {
+                $("#twx-login-button").hide();
+                $("#twx-logout-button").show();
+            } else {
+                $("#twx-login-button").show();
+                $("#twx-logout-button").hide();
+            }
+        }
+
+        $(document).ready(function() {
+            window.location.href = "tp-entitlements-get-token://onEntitlementToken";
+        });
+
+    </script>
+
+</body>
+
+</html>
